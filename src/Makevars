@@ -1,0 +1,20 @@
+# default lua lib
+# LUA_LIBS=$(shell pkg-config --libs lua)
+LUA_LIBS=-Llua-5.3.3/install/lib -llua -lm
+
+PKG_CPPFLAGS=-Ihighlight/include -Ilua-5.3.3/install/include -I.
+PKG_LIBS=-Lhighlight -lhighlight $(LUA_LIBS)
+
+.PHONY: all highlight lua clean
+
+all: $(SHLIB)
+$(SHLIB): highlight
+
+highlight: lua
+	(cd highlight; make lib-static CC="$(CC)" AR="$(AR) rcu" RANLIB="$(RANLIB)" LUA_CFLAGS=-I../lua-5.3.3/install/include)
+
+lua:
+	(cd lua-5.3.3; make generic; make local CC="$(CC)" AR="$(AR) rcu" RANLIB="$(RANLIB)")
+
+clean:
+	(cd highlight; make clean)

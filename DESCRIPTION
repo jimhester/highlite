@@ -1,0 +1,15 @@
+Package: highlite
+Title: R wrapper around the highlight library.
+Version: 0.0.0.9000
+Authors@R: person("Jim", "Hester", email = "james.f.hester@gmail.com", role = c("aut", "cre"))
+Description: Wraps the highlight library (http://www.andre-simon.de/doku/
+    highlight/en/highlight.php)
+Depends:
+    R (>= 3.3.0)
+License: GPL-3
+Encoding: UTF-8
+LazyData: true
+LinkingTo: Rcpp
+Imports:
+    Rcpp
+RoxygenNote: 5.0.1
