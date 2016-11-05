@@ -5,6 +5,16 @@
 
 using namespace Rcpp;
 
+// output_options
+Rcpp::IntegerVector output_options();
+RcppExport SEXP highlite_output_options() {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    rcpp_result_gen = Rcpp::wrap(output_options());
+    return rcpp_result_gen;
+END_RCPP
+}
 // highlight_
 std::string highlight_(std::string input, std::string type, std::string theme, std::string theme_path, std::string language_path);
 RcppExport SEXP highlite_highlight_(SEXP inputSEXP, SEXP typeSEXP, SEXP themeSEXP, SEXP theme_pathSEXP, SEXP language_pathSEXP) {

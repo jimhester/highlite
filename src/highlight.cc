@@ -1,7 +1,26 @@
 #include <Rcpp.h>
 #include "codegenerator.h"
 
-using namespace std;
+using namespace highlight;
+using namespace Rcpp;
+
+// [[Rcpp::export]]
+Rcpp::IntegerVector output_options() {
+  return Rcpp::IntegerVector::create(
+      Rcpp::_["HTML"] = HTML,
+      Rcpp::_["XHTML"] = XHTML,
+      Rcpp::_["TEX"] = TEX,
+      Rcpp::_["LATEX"] = LATEX,
+      Rcpp::_["RTF"] = RTF,
+      Rcpp::_["ESC_ANSI"] = ESC_ANSI,
+      Rcpp::_["ESC_XTERM256"] = ESC_XTERM256,
+      Rcpp::_["HTML32"] = HTML32,
+      Rcpp::_["SVG"] = SVG,
+      Rcpp::_["BBCODE"] = BBCODE,
+      Rcpp::_["PANGO"] = PANGO,
+      Rcpp::_["ODTFLAT"] = ODTFLAT,
+      Rcpp::_["ESC_TRUECOLOR"] = ESC_TRUECOLOR);
+}
 
 // [[Rcpp::export]]
 std::string highlight_(std::string input, std::string type, std::string theme, std::string theme_path, std::string language_path) {
