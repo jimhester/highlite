@@ -5,14 +5,14 @@ using namespace highlight;
 using namespace Rcpp;
 
 // [[Rcpp::export]]
-Rcpp::IntegerVector output_options() {
+Rcpp::IntegerVector output_types() {
   return Rcpp::IntegerVector::create(
+      Rcpp::_["ESC_ANSI"] = ESC_ANSI,
       Rcpp::_["HTML"] = HTML,
       Rcpp::_["XHTML"] = XHTML,
       Rcpp::_["TEX"] = TEX,
       Rcpp::_["LATEX"] = LATEX,
       Rcpp::_["RTF"] = RTF,
-      Rcpp::_["ESC_ANSI"] = ESC_ANSI,
       Rcpp::_["ESC_XTERM256"] = ESC_XTERM256,
       Rcpp::_["HTML32"] = HTML32,
       Rcpp::_["SVG"] = SVG,
@@ -23,26 +23,26 @@ Rcpp::IntegerVector output_options() {
 }
 
 // [[Rcpp::export]]
-std::string highlight_(std::string input, std::string type, std::string theme, std::string theme_path, std::string language_path) {
-  unique_ptr<highlight::CodeGenerator> generator(highlight::CodeGenerator::getInstance(highlight::ESC_ANSI));
+std::string highlight_(std::string input, std::string language, int output, std::string theme, std::string theme_path, std::string language_path) {
+  unique_ptr<highlight::CodeGenerator> generator(highlight::CodeGenerator::getInstance(static_cast<highlight::OutputType>(output)));
   if (!generator->initTheme(theme_path + "/" + theme + ".theme")) {
     Rcpp::stop(generator->getThemeInitError());
   }
   generator->initIndentationScheme("");
-  highlight::LoadResult loadRes = generator->loadLanguage(language_path + '/' + type + ".lang");
+  highlight::LoadResult loadRes = generator->loadLanguage(language_path + '/' + language + ".lang");
   std::stringstream err;
   if ( loadRes==highlight::LOAD_FAILED_REGEX ) {
     err << "highlight: Regex error ( "
       << generator->getSyntaxRegexError()
-      << " ) in "<< type <<".lang\n";
+      << " ) in "<< language <<".lang\n";
     Rcpp::stop(err.str());
   } else if ( loadRes==highlight::LOAD_FAILED_LUA ) {
     err << "highlight: Lua error ( "
       << generator->getSyntaxLuaError()
-      << " ) in "<< type <<".lang\n";
+      << " ) in "<< language <<".lang\n";
     Rcpp::stop(err.str());
   } else if ( loadRes==highlight::LOAD_FAILED ) {
-    Rcpp::stop("Could not load: " + language_path + '/' + type + ".lang");
+    Rcpp::stop("Could not load: " + language_path + '/' + language + ".lang");
   }
   return generator->generateString(input);
 }
