@@ -5,10 +5,17 @@ PKG_LIBS=-Lhighlight -lhighlight
 .PHONY: all highlight lua clean
 
 all: $(SHLIB)
-$(SHLIB): highlight
+
+$(SHLIB): highlight lua
 
 highlight: lua
-	(cd highlight;make lib-static CC="$(CC)" CXX="$(CXX)" AR="$(AR)" ARFLAGS="crs" RANLIB="$(RANLIB)" CFLAGS="$(CLINK_CPPFLAGS)" LUA_CFLAGS='-I../lua-5.3.3/install/include';mkdir -p lua hi;(cd lua;$(AR) -x ../../lua-5.3.3/install/lib/liblua.a);(cd hi;$(AR) -x ../libhighlight.a);$(AR) -qc libhighlight2.a lua/*o hi/*o;mv libhighlight2.a libhighlight.a;$(RANLIB) libhighlight.a)
+	(cd highlight;\
+make lib-static CC="$(CC)" CXX="$(CXX)" AR="$(AR)" ARFLAGS="crs" RANLIB="$(RANLIB)" CFLAGS="$(CLINK_CPPFLAGS)" LUA_CFLAGS='-I../lua-5.3.3/install/include';\
+mkdir -p lua hi;\
+(cd lua;$(AR) -x ../../lua-5.3.3/install/lib/liblua.a);\
+(cd hi;$(AR) -x ../libhighlight.a);\
+$(AR) -qc libhighlight2.a lua/*o hi/*o;mv libhighlight2.a libhighlight.a;\
+$(RANLIB) libhighlight.a)
 
 lua:
 	(cd lua-5.3.3; make c89 CC="$(CC)" CXX="$(CXX)" AR="$(AR) crs" RANLIB="$(RANLIB)"; make local)

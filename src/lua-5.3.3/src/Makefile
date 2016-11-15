@@ -49,7 +49,7 @@ ALL_A= $(LUA_A)
 # Targets start here.
 default: $(PLAT)
 
-all:	$(ALL_T)
+all:	$(ALL_A)
 
 o:	$(ALL_O)
 
