@@ -25,9 +25,9 @@ choices_rd <- function(x) {
 #' \href{http://andre-simon.de/doku/highlight/en/highlight.php}{highlight}
 #' package to highlight code in
 #' \Sexpr[stage=render]{length(highlite:::choices(highlite:::package_file("langDefs")))} programming
-#' languages, markup languages and configuration files. It Can output to a variety
-#' of formats including \sQuote{HTML}, \sQuote{ANSI escape codes},
-#' \sQuote{TeX}, \sQuote{LaTeX} and \sQuote{SVG}.
+#' languages, markup languages and configuration files. Available output
+#' formats include \sQuote{HTML}, \sQuote{ANSI escape codes}, \sQuote{TeX},
+#' \sQuote{LaTeX} and \sQuote{SVG}.
 #' @param code \code{[character()]}\cr The code to highlight. Multiple lines will be joined by newlines.
 #' @param language \code{[character(1)]} default: \sQuote{r}\cr The language,
 #' one of \Sexpr[stage=render, results=rd]{highlite:::choices_rd(highlite:::choices(highlite:::package_file("langDefs")))} with

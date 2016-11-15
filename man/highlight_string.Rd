@@ -31,8 +31,8 @@ This function uses Andre Simon's
 \href{http://andre-simon.de/doku/highlight/en/highlight.php}{highlight}
 package to highlight code in
 \Sexpr[stage=render]{length(highlite:::choices(highlite:::package_file("langDefs")))} programming
-languages, markup languages and configuration files. It Can output to a variety
-of formats including \sQuote{HTML}, \sQuote{ANSI escape codes},
-\sQuote{TeX}, \sQuote{LaTeX} and \sQuote{SVG}.
+languages, markup languages and configuration files. Available output
+formats include \sQuote{HTML}, \sQuote{ANSI escape codes}, \sQuote{TeX},
+\sQuote{LaTeX} and \sQuote{SVG}.
 }
 
