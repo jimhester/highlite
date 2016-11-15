@@ -2,7 +2,6 @@
 #include "codegenerator.h"
 
 using namespace highlight;
-using namespace Rcpp;
 
 // [[Rcpp::export]]
 Rcpp::IntegerVector output_types() {
