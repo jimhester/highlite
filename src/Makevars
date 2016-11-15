@@ -6,7 +6,7 @@ PKG_LIBS=-Lhighlight -lhighlight
 
 all: $(SHLIB)
 
-$(SHLIB): highlight lua
+$(SHLIB): lua highlight
 
 highlight: lua
 	(cd highlight;\
