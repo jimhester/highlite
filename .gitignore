@@ -2,3 +2,6 @@
 .Rhistory
 .RData
 *.a
+src/lua-5.3.3/src/lua
+src/lua-5.3.3/src/luac
+src/lua-5.3.3/install
