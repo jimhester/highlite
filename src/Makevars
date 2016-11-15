@@ -2,7 +2,7 @@
 LUA_LIBS=-lm lua-5.3.3/install/lib/liblua.a
 
 PKG_CPPFLAGS=-Ihighlight/include -Ilua-5.3.3/install/include -I. -DLUA_USE_C89
-PKG_LIBS=$(LUA_LIBS) -Lhighlight -lhighlight
+PKG_LIBS=$(LUA_LIBS) highlight/libhighlight.a
 
 .PHONY: all highlight lua clean
 
@@ -10,10 +10,10 @@ all: $(SHLIB)
 $(SHLIB): highlight
 
 highlight: lua
-	(cd highlight; make lib-static CC="$(CC)" AR="$(AR) rcu" RANLIB="$(RANLIB)" LUA_CFLAGS='-I../lua-5.3.3/install/include' )
+	(cd highlight; make lib-static CC="$(CC)" CXX="$(CXX)" AR="$(AR)" ARFLAGS="rcT" RANLIB="$(RANLIB)" CFLAGS="$(CLINK_CPPFLAGS)" LUA_CFLAGS='-I../lua-5.3.3/install/include')
 
 lua:
-	(cd lua-5.3.3; make c89 CC="$(CC)" AR="$(AR) rcu" RANLIB="$(RANLIB)"; make local)
+	(cd lua-5.3.3; make c89 CC="$(CC)" CXX="$(CXX)" AR="$(AR) rcT" RANLIB="$(RANLIB)"; make local)
 
 clean:
 	(cd highlight; make clean)

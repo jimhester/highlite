@@ -46,7 +46,7 @@ RtfGenerator::RtfGenerator()
 {
     newLineTag = "}\\par\\pard\n\\cbpat1{";
     spacer = " ";
-   
+
     // Page dimensions
     psMap["a3"] = PageSize ( 16837,23811 );
     psMap["a4"] = PageSize ( 11905,16837 );
@@ -125,7 +125,7 @@ string RtfGenerator::getCharStyle ( int styleNumber,const ElementStyle &elem,
 void RtfGenerator::printBody()
 {
   isUtf8 = StringTools::change_case ( encoding ) == "utf-8";
-  
+
   *out << "{\\rtf1\\ansi \\deff1" // drop \\uc0 because of unicode output
          << "{\\fonttbl{\\f1\\fmodern\\fprq1\\fcharset0 " ;
     *out << this->getBaseFont() ;
@@ -190,10 +190,10 @@ void RtfGenerator::printBody()
         }
         *out << "}}\n";
     }
-    
+
     if (addPageColor) {
-      long svVal =  docStyle.getBgColour().getRed() +  
-                    docStyle.getBgColour().getGreen() * 256+ 
+      long svVal =  docStyle.getBgColour().getRed() +
+                    docStyle.getBgColour().getGreen() * 256+
                     docStyle.getBgColour().getBlue() * 256 * 256;
                     *out<<"\\viewbksp1\\ilfomacatclnup0{\\*\\background{\\shp{{\\sp{\\sn fillColor}{\\sv "<<svVal<<"}}}}}\n";
     }
@@ -244,11 +244,11 @@ void RtfGenerator::initOutputTags ( )
 }
 
 string RtfGenerator::maskCharacter ( unsigned char c )
-{  
+{
   if (isUtf8 && c > 0x7f  && utf8SeqLen==0){
-    
+
     //http://stackoverflow.com/questions/7153935/how-to-convert-utf-8-stdstring-to-utf-16-stdwstring
-    
+
     if (c <= 0xDF)
     {
       utf16Char = c&0x1F;
@@ -268,15 +268,15 @@ string RtfGenerator::maskCharacter ( unsigned char c )
     }
     return "";
   }
-  
+
   if (utf8SeqLen) {
       utf16Char <<= 6;
-      utf16Char += c & 0x3f;   
+      utf16Char += c & 0x3f;
       --utf8SeqLen;
-    
+
       if (!utf8SeqLen){
         string m ( "\\u" );
-        m += to_string(utf16Char);
+        m += boost::to_string(utf16Char);
         m += '?';
         utf16Char=0L;
         return m;
@@ -284,7 +284,7 @@ string RtfGenerator::maskCharacter ( unsigned char c )
         return "";
       }
   }
-  
+
   switch ( c ) {
     case '}' :
     case '{' :
