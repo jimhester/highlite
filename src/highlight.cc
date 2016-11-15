@@ -1,5 +1,6 @@
 #include <Rcpp.h>
 #include "codegenerator.h"
+#include <boost/move/unique_ptr.hpp>
 
 using namespace highlight;
 
@@ -21,8 +22,10 @@ Rcpp::IntegerVector output_types() {
       Rcpp::_["ESC_TRUECOLOR"] = ESC_TRUECOLOR);
 }
 
+
 // [[Rcpp::export]]
 std::string highlight_(std::string input, std::string language, int output, std::string theme, std::string theme_path, std::string language_path) {
+  using boost::movelib::unique_ptr;
   unique_ptr<highlight::CodeGenerator> generator(highlight::CodeGenerator::getInstance(static_cast<highlight::OutputType>(output)));
   if (!generator->initTheme(theme_path + "/" + theme + ".theme")) {
     Rcpp::stop(generator->getThemeInitError());
