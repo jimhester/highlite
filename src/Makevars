@@ -1,8 +1,8 @@
 # default lua lib
-LUA_LIBS=-Llua-5.3.3/install/lib -llua -lm
+LUA_LIBS=-lm lua-5.3.3/install/lib/liblua.a
 
 PKG_CPPFLAGS=-Ihighlight/include -Ilua-5.3.3/install/include -I. -DLUA_USE_C89
-PKG_LIBS=-Lhighlight -lhighlight $(LUA_LIBS)
+PKG_LIBS=$(LUA_LIBS) -Lhighlight -lhighlight
 
 .PHONY: all highlight lua clean
 
