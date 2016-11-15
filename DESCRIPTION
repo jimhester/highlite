@@ -1,11 +1,14 @@
 Package: highlite
-Title: R wrapper around the highlight library.
+Title: A Highlighting Library For R
 Version: 0.0.0.9000
 Authors@R: person("Jim", "Hester", email = "james.f.hester@gmail.com", role = c("aut", "cre"))
-Description: Wraps the highlight library (http://www.andre-simon.de/doku/
-    highlight/en/highlight.php)
+Description: Highlite provides an R extension of Andre Simon's C++ library
+  highlight (http://www.andre-simon.de/doku/highlight/en/highlight.php). It
+  provides syntax highlighting without the need to compile and install a separate
+  executable and includes support for over 200 languages, 80 themes and 10
+  output formats, including ANSI Escape Codes, HTML, LaTeX and SVG.
 Depends:
-    R (>= 3.3.0)
+    R (>= 3.2.0)
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
