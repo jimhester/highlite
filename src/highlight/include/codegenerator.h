@@ -263,7 +263,7 @@ public:
      * \param  flag true if plug-in injections should be outputted if header 
      * and footer are omitted (fragmentCode is true)
      */
-    void setKeepInjections( bool flag );;
+    void setKeepInjections( bool flag );
 
     /** \return keep injection flag */
     bool getKeepInjections();
