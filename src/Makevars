@@ -1,5 +1,5 @@
 # default lua lib
-PKG_CPPFLAGS=-Ihighlight/include -Ilua-5.3.3/install/include -I. -DLUA_USE_C89
+PKG_CPPFLAGS=-Ihighlight/include -Ilua-5.3.3/install/include -I. -DLUA_USE_C89 -fPIC
 PKG_LIBS=-Lhighlight -lhighlight
 
 .PHONY: all highlight lua clean
