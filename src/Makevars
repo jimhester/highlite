@@ -19,7 +19,7 @@ $(RANLIB) libhighlight.a && \
 rm -r lua hi)
 
 lua:
-	(cd lua-5.3.3; make c89 CC="$(CC)" CXX="$(CXX)" AR="$(AR) crs" RANLIB="$(RANLIB)"; make local)
+	(cd lua-5.3.3; make c89 CC="$(CC)" CXX="$(CXX)" AR="$(AR) crs" RANLIB="$(RANLIB)" MYCFLAGS="-fPIC"; make local)
 
 clean:
 	(cd highlight; make clean)
