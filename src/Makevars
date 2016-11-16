@@ -1,5 +1,5 @@
 # default lua lib
-PKG_CPPFLAGS=-Ihighlight/include -Ilua-5.3.3/install/include -I. -DLUA_USE_C89 -fPIC
+PKG_CPPFLAGS=-Ihighlight/include -Ilua-5.3.3/install/include -I. -DLUA_USE_C89
 PKG_LIBS=-Lhighlight -lhighlight
 
 .PHONY: all highlight lua clean
@@ -10,7 +10,7 @@ $(OBJECTS): lua highlight
 
 highlight: lua
 	(cd highlight && \
-make lib-static CC="$(CC)" CXX="$(CXX)" AR="$(AR)" ARFLAGS="crs" RANLIB="$(RANLIB)" CFLAGS="$(CLINK_CPPFLAGS) -fPIC" LUA_CFLAGS='-I../lua-5.3.3/install/include' && \
+make lib-static CC="$(CC)" CXX="$(CXX)" AR="$(AR)" ARFLAGS="crs" RANLIB="$(RANLIB)" CFLAGS="$(CLINK_CPPFLAGS) $(CPICFLAGS)" LUA_CFLAGS='-I../lua-5.3.3/install/include' && \
 mkdir -p lua hi && \
 (cd lua;$(AR) -x ../../lua-5.3.3/install/lib/liblua.a) && \
 (cd hi;$(AR) -x ../libhighlight.a) && \
@@ -19,7 +19,7 @@ $(RANLIB) libhighlight.a && \
 rm -r lua hi)
 
 lua:
-	(cd lua-5.3.3; make c89 CC="$(CC)" CXX="$(CXX)" AR="$(AR) crs" RANLIB="$(RANLIB)" MYCFLAGS="-fPIC"; make local)
+	(cd lua-5.3.3; make c89 CC="$(CC)" CXX="$(CXX)" AR="$(AR) crs" RANLIB="$(RANLIB)" MYCFLAGS="$(CPICFLAGS)"; make local)
 
 clean:
 	(cd highlight; make clean)
