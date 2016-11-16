@@ -10,7 +10,7 @@ $(OBJECTS): lua highlight
 
 highlight: lua
 	(cd highlight && \
-make lib-static CC="$(CC)" CXX="$(CXX)" AR="$(AR)" ARFLAGS="crs" RANLIB="$(RANLIB)" CFLAGS="$(CLINK_CPPFLAGS)" LUA_CFLAGS='-I../lua-5.3.3/install/include' && \
+make lib-static CC="$(CC)" CXX="$(CXX)" AR="$(AR)" ARFLAGS="crs" RANLIB="$(RANLIB)" CFLAGS="$(CLINK_CPPFLAGS) -fPIC" LUA_CFLAGS='-I../lua-5.3.3/install/include' && \
 mkdir -p lua hi && \
 (cd lua;$(AR) -x ../../lua-5.3.3/install/lib/liblua.a) && \
 (cd hi;$(AR) -x ../libhighlight.a) && \
