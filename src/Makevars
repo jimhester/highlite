@@ -9,12 +9,15 @@ all: $(OBJECTS) $(SHLIB)
 $(OBJECTS): lua highlight
 
 highlight: lua
+# After building highlight we need to combine the two static libs into one
+# library, it seems the only way to do portably with the tools available is to
+# extract the objects from each into separate directories and recombine them
 	(cd highlight && \
 make lib-static CC="$(CC)" CXX="$(CXX)" AR="$(AR)" ARFLAGS="crs" RANLIB="$(RANLIB)" CFLAGS="$(CLINK_CPPFLAGS) $(CPICFLAGS)" LUA_CFLAGS='-I../lua-5.3.3/install/include' && \
 mkdir -p lua hi && \
-(cd lua;$(AR) -x ../../lua-5.3.3/install/lib/liblua.a) && \
-(cd hi;$(AR) -x ../libhighlight.a) && \
-$(AR) -qc libhighlight2.a lua/*o hi/*o;mv libhighlight2.a libhighlight.a && \
+(cd liblua;$(AR) -x ../../lua-5.3.3/install/lib/liblua.a) && \
+(cd libhighlight;$(AR) -x ../libhighlight.a) && \
+$(AR) -qc libhighlight2.a liblua/*o libhighlight/*o;mv libhighlight2.a libhighlight.a && \
 $(RANLIB) libhighlight.a && \
 rm -r lua hi)
 
