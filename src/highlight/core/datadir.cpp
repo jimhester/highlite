@@ -29,6 +29,7 @@ along with Highlight.  If not, see <http://www.gnu.org/licenses/>.
 #include <fstream>
 #include <vector>
 #include "platform_fs.h"
+#include <cstdlib>
 
 #include "datadir.h"
 
