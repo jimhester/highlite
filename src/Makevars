@@ -4,9 +4,9 @@ PKG_LIBS=-Lhighlight -lhighlight
 
 .PHONY: all highlight lua clean
 
-all: $(SHLIB)
+all: $(OBJECTS) $(SHLIB)
 
-$(SHLIB): lua highlight
+$(OBJECTS): lua highlight
 
 highlight: lua
 	(cd highlight && \
